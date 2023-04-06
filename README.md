@@ -1,4 +1,4 @@
-# JavaScript-CrateWebSite-with-Dom
+# Creating-dynamic-website-with-JavaScript-Dom
 
 Creating dynamic website with JavaScript Dom / JavaScript Dom ile dinamik web sitesi oluşturma
 
