@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Özge Bahçeci</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+<body>
+    
+    <div class="container" style="margin: 20px;" >
+        <div class="row">
+            <div class="col-6" style="background-color: rgb(243, 144, 210);">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" style="text-align: center; ">Add Component</h4>
+                        <label>Select Component</label>
+
+                        <select class="form-control mb-3" onchange="select()" id="component" >
+                            <option value="a1">&nbsp;</option>
+                            <option value="Button">Button</option>
+                            <option value="Div">Div</option>
+                            <option value="H">H</option>
+                            <option value="Image">Image</option>          
+                            <option value="Input">Input</option>
+                            <option value="Link">Link</option>
+                            <option value="P">P</option>
+                        </select>
+  
+                        <label hidden id="SelectComponentId" >Select Component Id</label>
+                        <select class="form-control mb-3"  id="componentId" hidden>
+ 
+                        </select>
+                        <label for="addId" id="addIdlabel" hidden>Id</label>
+                        <input type="text" name="" id="addId" placeholder="Add Id" class="form-control mb-3" hidden>
+                        
+                        <label for="addClass" id="addClassId" hidden>Class</label>
+                        <input type="text" name="" id="addClass" placeholder="Add Class" class="form-control mb-3" hidden>
+                        
+                        <label for="Color" id="ColorId" hidden >Color</label>
+                        <select class="form-control mb-3" id="Color" hidden>
+                            <option value="danger">Danger</option>
+                            <option value="dark">Dark</option>
+                            <option value="info">Info</option>
+                            <option value="light">Light</option>
+                            <option value="muted">Muted</option>
+                            <option value="primary">Primary</option>
+                            <option value="warning">Warning</option>
+                            <option value="secondary">Secondary</option>
+                            <option value="success">Success</option>
+                            <option value="white">White</option>
+                        </select>
+                        <label for="textColor" id="textColorId" hidden>Text Color</label>
+                        <select class="form-control mb-3" id="textColor" hidden>
+                            <option value="danger">Danger</option>
+                            <option value="dark">Dark</option>
+                            <option value="info">Info</option>
+                            <option value="light">Light</option>
+                            <option value="muted">Muted</option>
+                            <option value="primary">Primary</option>
+                            <option value="warning">Warning</option>
+                            <option value="secondary">Secondary</option>
+                            <option value="success">Success</option>
+                            <option value="white">White</option>
+                        </select>
+
+                        <label for="btnSize" id="btnSizeId" hidden>Button Size</label>
+                        <select class="form-control mb-3" id="btnSize" hidden>
+                            <option >Regular</option>
+                            <option value="btn-sm">Small</option>
+                            <option value="btn-lg">Large</option>
+                        </select>
+
+                        <label for="inputSize" id="inputSizeId" hidden>Input Size</label>
+                        <select class="form-control mb-3" id="inputSize" hidden>
+                            <option >Regular</option>
+                            <option value="input-sm">Small</option>
+                            <option value="input-lg">Large</option>
+                        </select>
+
+                        <label for="Text" id="TextId" hidden >Text</label>
+                        <input type="text" placeholder="Text" id="Text" class="form-control mb-3"hidden >
+
+                        <label for="Link" id="LinkId"hidden>Link</label>
+                        <input type="text" placeholder="Adres" id="Link" class="form-control mb-3" hidden>
+                        
+                        <label for="H" id="HId" hidden>Header Size</label>
+                        <select class="form-control mb-3" id="H" hidden>
+                            <option value="h1">H1</option>
+                            <option value="h2">H2</option>
+                            <option value="h3">H3</option> 
+                            <option value="h4">H4</option>
+                            <option value="h5">H5</option>
+                            <option value="h6">H6</option>
+                        </select>
+                    </div>
+                    <div class="card-footer" >
+                        <button class="btn btn-warning form-control "  onclick="addComponent()">Add Companent</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6" id="content">
+
+            </div>
+        </div>
+    </div>
+
+    <script >
+       
+let listItem = document.createElement("option");
+let itemText = document.createTextNode("content");
+listItem.appendChild(itemText);
+
+document.getElementById("componentId").append(listItem);
+
+
+function addComponent() {
+    let listItem = document.createElement("option");
+    let itemText = document.createTextNode(document.getElementById("addId").value);
+    listItem.appendChild(itemText);
+
+    document.getElementById("componentId").append(listItem);
+
+    let component = document.getElementById("component").value;
+    let componentId = document.getElementById("componentId").value;
+
+    switch (component) {
+        case "Div":
+            document.getElementById(componentId).innerHTML += addDiv();
+        break;
+        case "Button":
+            document.getElementById(componentId).innerHTML += addButton();
+        break;
+        case "Image":
+            document.getElementById(componentId).innerHTML += addImage();
+        break;
+        case "Link":
+            document.getElementById(componentId).innerHTML += addLink();
+        break;
+        case "P":
+            document.getElementById(componentId).innerHTML += addP();
+        break;
+        case "Input":
+            document.getElementById(componentId).innerHTML += addInput();
+        break;
+        case "H":
+            document.getElementById(componentId).innerHTML += addH();
+        break;
+    }
+}
+
+function addDiv() {
+
+    var bgColor = document.getElementById("Color").value;
+    var textColor = document.getElementById("textColor").value;
+    var Text = document.getElementById("Text").value;
+    var addClass = document.getElementById("addClass").value;
+    var addId = document.getElementById("addId").value;
+
+    var div = "<div id='" + addId + "' class='bg-" + bgColor + " " + addClass + " text-" + textColor + "'>" + Text + "</div>";
+    console.log(div) 
+    return div;
+}
+
+function addButton() {
+
+    var bgColor = document.getElementById("Color").value;
+    var buttonSize = document.getElementById("btnSize").value;
+    var Text = document.getElementById("Text").value;
+    var addClass = document.getElementById("addClass").value;
+    var addId = document.getElementById("addId").value;
+
+    /* <button id='1' class='btn btn-danger Regular btn-danger '>1</button> */
+    var button = "<button id='" + addId + "' class='btn btn-" + bgColor + " " + addClass + " " + buttonSize + " '>" + Text + "</button>";
+    console.log(button)
+    return button;
+}
+
+function addLink() {
+
+    var bgColor = document.getElementById("Color").value;
+    var Text = document.getElementById("Text").value;
+    var addClass = document.getElementById("addClass").value;
+    var addId = document.getElementById("addId").value;
+    var Link = document.getElementById("Link").value;
+
+    /* <a href="#" class="link-primary">Primary link</a> */
+    var link = "<a id='" + addId + "'href=" + Link + " class='link-" + bgColor + " " + addClass + "'>" + Text + "</a>";
+    console.log(link)
+    return link;
+}
+
+function addP() {
+
+    var bgColor = document.getElementById("Color").value;
+    var Text = document.getElementById("Text").value;
+    var addClass = document.getElementById("addClass").value;
+    var addId = document.getElementById("addId").value;
+
+    /* <p style="background-color:pink">This is some text in a paragraph.</p> */
+    var p = "<p id='" + addId + "' class='link-" + bgColor + " " + addClass + "'>" + Text + "</p>";
+    console.log(p)
+    return p;
+}
+
+function addImage() {
+
+    var addClass = document.getElementById("addClass").value;
+    var addId = document.getElementById("addId").value;
+    var Link = document.getElementById("Link").value;
+
+
+    /* <img src="..." class="img-fluid" */
+    var image = "<img src='" + Link + "' class='img-" + addClass + "id='" + addId + "'></img>";
+    console.log(image);
+    return image;
+}
+
+
+function addInput() {
+
+    var bgColor = document.getElementById("Color").value;
+    var textColor = document.getElementById("textColor").value;
+    var Text = document.getElementById("Text").value;
+    var addClass = document.getElementById("addClass").value;
+    var addId = document.getElementById("addId").value;
+
+    // <label for="fname">First name:</label>
+    // <input type="text" id="fname" name="fname"><br><br>
+    var input = "<label>"+Text +": "+"&nbsp" +"</label><input id='" + addId + "' class='bg-" + bgColor + " " + addClass + " text-" + textColor + "'>" + "</input>";
+    console.log(input) 
+    return input;
+}
+
+function addH() {
+
+    var bgColor = document.getElementById("Color").value;
+    var hSize = document.getElementById("H").value;
+    var Text = document.getElementById("Text").value;
+    var addClass = document.getElementById("addClass").value;
+    var addId = document.getElementById("addId").value;
+    var textColor = document.getElementById("textColor").value;
+
+    var h = "<"+hSize+" + id='" + addId + "' class='bg-" + bgColor + " " + addClass + " text-" + textColor + "'>" + Text + "</"+hSize+">";
+    console.log(h) 
+    return h;
+}
+
+
+function select() {
+    var component = document.getElementById("component").value;
+
+    if (component == "Button") {
+        classTag();
+        document.getElementById("btnSize").hidden = false;
+        document.getElementById("btnSizeId").hidden = false;
+        document.getElementById("textColor").hidden = true;
+        document.getElementById("textColorId").hidden = true;
+        document.getElementById("ColorId").hidden = false;
+        document.getElementById("Color").hidden = false;
+        document.getElementById("LinkId").hidden = true;
+        document.getElementById("Link").hidden = true;
+        document.getElementById("inputSize").hidden = true;
+        document.getElementById("inputSizeId").hidden = true;
+        document.getElementById("H").hidden = true;
+        document.getElementById("HId").hidden = true;
+        document.getElementById("Text").hidden=false
+        document.getElementById("TextId").hidden=false
+    }
+    else if (component == "Div") {
+        classTag();
+        document.getElementById("btnSize").hidden = true;
+        document.getElementById("btnSizeId").hidden = true;
+        document.getElementById("textColor").hidden = false;
+        document.getElementById("textColorId").hidden = false;
+        document.getElementById("ColorId").hidden = false;
+        document.getElementById("Color").hidden = false;
+        document.getElementById("LinkId").hidden = true;
+        document.getElementById("Link").hidden = true;
+        document.getElementById("Text").hidden = false;
+        document.getElementById("TextId").hidden = false;
+        document.getElementById("inputSize").hidden = true;
+        document.getElementById("inputSizeId").hidden = true;
+        document.getElementById("H").hidden = true;
+        document.getElementById("HId").hidden = true;
+        document.getElementById("Text").hidden=false
+        document.getElementById("TextId").hidden=false
+
+    }
+    else if (component == "Link") {
+        classTag();
+        document.getElementById("btnSize").hidden = true;
+        document.getElementById("btnSizeId").hidden = true;
+        document.getElementById("textColor").hidden = true;
+        document.getElementById("textColorId").hidden = true;
+        document.getElementById("ColorId").hidden = false;
+        document.getElementById("Color").hidden = false;
+        document.getElementById("LinkId").hidden = false;
+        document.getElementById("Link").hidden = false;
+        document.getElementById("Text").hidden = false;
+        document.getElementById("TextId").hidden = false;
+        document.getElementById("inputSize").hidden = true;
+        document.getElementById("inputSizeId").hidden = true;
+        document.getElementById("H").hidden = true;
+        document.getElementById("HId").hidden = true;
+        document.getElementById("Text").hidden=false
+        document.getElementById("TextId").hidden=false
+    }
+    else if (component == "P") {
+        classTag();
+        document.getElementById("btnSize").hidden = true;
+        document.getElementById("btnSizeId").hidden = true;
+        document.getElementById("textColor").hidden = true;
+        document.getElementById("textColorId").hidden = true;
+        document.getElementById("ColorId").hidden = false;
+        document.getElementById("Color").hidden = false;
+        document.getElementById("LinkId").hidden = true;
+        document.getElementById("Link").hidden = true;
+        document.getElementById("Text").hidden = false;
+        document.getElementById("TextId").hidden = false;
+        document.getElementById("inputSize").hidden = true;
+        document.getElementById("inputSizeId").hidden = true;
+        document.getElementById("H").hidden = true;
+        document.getElementById("HId").hidden = true;
+        document.getElementById("Text").hidden=false
+        document.getElementById("TextId").hidden=false
+
+    }
+    else if (component == "Image") {
+        classTag();
+        document.getElementById("btnSize").hidden = true;
+        document.getElementById("btnSizeId").hidden = true;
+        document.getElementById("textColor").hidden = true;
+        document.getElementById("textColorId").hidden = true;
+        document.getElementById("ColorId").hidden = true;
+        document.getElementById("Color").hidden = true;
+        document.getElementById("LinkId").hidden = false;
+        document.getElementById("Link").hidden = false;
+        document.getElementById("Text").hidden = true;
+        document.getElementById("TextId").hidden = true;
+        document.getElementById("inputSize").hidden = true;
+        document.getElementById("inputSizeId").hidden = true;
+        document.getElementById("H").hidden = true;
+        document.getElementById("HId").hidden = true;
+        document.getElementById("Text").hidden=true
+        document.getElementById("TextId").hidden=true
+    }
+    else if (component == "Input") {
+        classTag();
+        document.getElementById("btnSize").hidden = true;
+        document.getElementById("btnSizeId").hidden = true;
+        document.getElementById("textColor").hidden = false;
+        document.getElementById("textColorId").hidden = false;
+        document.getElementById("ColorId").hidden = false;
+        document.getElementById("Color").hidden = false;
+        document.getElementById("LinkId").hidden = true;
+        document.getElementById("Link").hidden = true;
+        document.getElementById("Text").hidden = false;
+        document.getElementById("TextId").hidden = false;
+        document.getElementById("inputSize").hidden = false;
+        document.getElementById("inputSizeId").hidden = false;
+        document.getElementById("H").hidden = true;
+        document.getElementById("HId").hidden = true;
+        document.getElementById("Text").hidden=false
+        document.getElementById("TextId").hidden=false
+    }
+    else if (component == "H") {
+        classTag();
+        document.getElementById("btnSize").hidden = true;
+        document.getElementById("btnSizeId").hidden = true;
+        document.getElementById("textColor").hidden = false;
+        document.getElementById("textColorId").hidden = false;
+        document.getElementById("ColorId").hidden = false;
+        document.getElementById("Color").hidden = false;
+        document.getElementById("LinkId").hidden = true;
+        document.getElementById("Link").hidden = true;
+        document.getElementById("Text").hidden = false;
+        document.getElementById("TextId").hidden = false;
+        document.getElementById("inputSize").hidden = true;
+        document.getElementById("inputSizeId").hidden = true;
+        document.getElementById("H").hidden = false;
+        document.getElementById("HId").hidden = false;
+        document.getElementById("Text").hidden=false
+        document.getElementById("TextId").hidden=false
+    }
+
+}
+function classTag(){
+    document.getElementById("SelectComponentId").hidden = false;
+    document.getElementById("componentId").hidden = false;
+    document.getElementById("addId").hidden = false;
+    document.getElementById("addIdlabel").hidden = false;
+    document.getElementById("addClassId").hidden = false;
+    document.getElementById("addClass").hidden = false;
+
+}
+ 
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script> 
+</body>
+</html>
